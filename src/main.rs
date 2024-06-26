@@ -6,6 +6,7 @@ use bevy::{
 use commander::camera::setup_commander_camera;
 
 pub mod commander;
+pub mod world;
 
 fn main() {
     App::new()
