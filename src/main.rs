@@ -3,9 +3,18 @@ use bevy::{
     prelude::*,
     window::WindowResolution,
 };
-use commander::camera::setup_commander_camera;
+use bevy_flycam::FlyCam;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy_sprite3d::Sprite3dPlugin;
+use commander::{camera::setup_commander_camera, control::move_camera};
+use loading::loading::{check_assets_ready, setup_loading};
+use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
+use state::GameState;
 
 pub mod commander;
+pub mod loading;
+pub mod sprites;
+pub mod state;
 pub mod world;
 
 fn main() {
@@ -25,6 +34,18 @@ fn main() {
                 })
                 .set(ImagePlugin::default_nearest()),
         )
-        .add_systems(Startup, setup_commander_camera)
+        .add_plugins(bevy_flycam::PlayerPlugin)
+        .add_plugins(Sprite3dPlugin)
+        .init_state::<GameState>()
+        .add_plugins(WorldInspectorPlugin::new())
+        // .add_systems(Startup, setup_commander_camera)
+        .add_systems(Update, rotate_sprites_to_camera)
+        .add_systems(Update, move_camera)
+        .add_systems(PreStartup, setup_loading)
+        .add_systems(OnEnter(GameState::Game), spawn_units)
+        .add_systems(
+            Update,
+            check_assets_ready.run_if(in_state(GameState::Loading)),
+        )
         .run();
 }
