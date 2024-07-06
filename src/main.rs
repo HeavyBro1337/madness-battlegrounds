@@ -3,10 +3,9 @@ use bevy::{
     prelude::*,
     window::WindowResolution,
 };
-use bevy_flycam::FlyCam;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
-use commander::{camera::setup_commander_camera, control::move_camera};
+use commander::control::move_camera;
 use loading::loading::{check_assets_ready, setup_loading};
 use sprites::sprite::{animate_sprite, rotate_sprites_to_camera, spawn_units};
 use state::GameState;

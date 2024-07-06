@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy_sprite3d::{Sprite3d, Sprite3dBundle, Sprite3dComponent, Sprite3dParams};
+use bevy_sprite3d::{Sprite3d, Sprite3dComponent, Sprite3dParams};
 
 use crate::loading::loading::ImageLayouts;
 
@@ -50,13 +50,20 @@ pub fn spawn_units(
             }
             .bundle_with_atlas(&mut sprite_params, texture_atlas),
         )
-        .insert((AnimationTimer::new(Timer::from_seconds(
-            0.1,
-            TimerMode::Repeating,
-        )), CurrentAnimationFrameCount(6)));
+        .insert((
+            AnimationTimer::new(Timer::from_seconds(0.1, TimerMode::Repeating)),
+            CurrentAnimationFrameCount(6),
+        ));
 }
 
-pub fn animate_sprite(time: Res<Time>, mut q_sprite: Query<(&mut TextureAtlas, &mut AnimationTimer, &CurrentAnimationFrameCount)>) {
+pub fn animate_sprite(
+    time: Res<Time>,
+    mut q_sprite: Query<(
+        &mut TextureAtlas,
+        &mut AnimationTimer,
+        &CurrentAnimationFrameCount,
+    )>,
+) {
     for (mut atlas, mut timer, frame_count) in q_sprite.iter_mut() {
         timer.0.tick(time.delta());
         if timer.0.just_finished() {

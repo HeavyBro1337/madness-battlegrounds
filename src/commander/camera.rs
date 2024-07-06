@@ -1,7 +1,6 @@
 use bevy::{
     prelude::*,
     prelude::{default, Camera3dBundle, Commands, Component},
-    render::camera::OrthographicProjection,
 };
 
 #[derive(Component)]
@@ -14,13 +13,6 @@ const COMMANDER_POSITION: Vec3 = Vec3 {
 };
 
 pub fn setup_commander_camera(mut commands: Commands) {
-    use bevy::render::camera::Projection::Orthographic;
-
-    let projection = OrthographicProjection {
-        scaling_mode: bevy::render::camera::ScalingMode::FixedHorizontal(32.0),
-        ..default()
-    };
-
     commands.spawn((
         Camera3dBundle {
             projection: Projection::Perspective(PerspectiveProjection::default()),

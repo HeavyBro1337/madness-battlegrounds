@@ -1,15 +1,13 @@
 use bevy::{
     input::ButtonInput,
-    prelude::{Event, KeyCode, Query, Res, With},
+    prelude::{KeyCode, Query, Res, With},
     render::camera::Camera,
     time::Time,
     transform::components::Transform,
 };
 
-use super::camera::CommanderCamera;
-
 pub fn move_camera(
-    mut q_commander_transform: Query<&mut Transform, With<Camera>>,
+    q_commander_transform: Query<&mut Transform, With<Camera>>,
     keyboard: Res<ButtonInput<KeyCode>>,
     time: Res<Time>,
 ) {

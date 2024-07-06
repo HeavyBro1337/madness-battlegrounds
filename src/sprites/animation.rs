@@ -1,9 +1,4 @@
-use std::time::Duration;
-
-use bevy::{
-    prelude::{Commands, Component, Resource},
-    time::Timer,
-};
+use bevy::{prelude::Component, time::Timer};
 
 #[derive(Default, Component)]
 pub struct AnimationTimer(pub Timer);
