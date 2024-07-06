@@ -8,7 +8,7 @@ use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
 use commander::{camera::setup_commander_camera, control::move_camera};
 use loading::loading::{check_assets_ready, setup_loading};
-use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
+use sprites::sprite::{animate_sprite, rotate_sprites_to_camera, spawn_units};
 use state::GameState;
 
 pub mod commander;
@@ -40,7 +40,7 @@ fn main() {
         .add_plugins(WorldInspectorPlugin::new())
         // .add_systems(Startup, setup_commander_camera)
         .add_systems(Update, rotate_sprites_to_camera)
-        .add_systems(Update, move_camera)
+        .add_systems(Update, (move_camera, animate_sprite))
         .add_systems(PreStartup, setup_loading)
         .add_systems(OnEnter(GameState::Game), spawn_units)
         .add_systems(

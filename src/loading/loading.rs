@@ -26,7 +26,16 @@ pub fn setup_loading(
             .untyped(),
     );
     commands.insert_resource(loading_assets);
-    image_layouts.0.insert("sprites/unit_idle.png".to_string(),atlases.add(TextureAtlasLayout::from_grid(Vec2::ONE * 100.0, 1, 6, None, None)));
+    image_layouts.0.insert(
+        "sprites/unit_idle.png".to_string(),
+        atlases.add(TextureAtlasLayout::from_grid(
+            Vec2::ONE * 100.0,
+            6,
+            1,
+            None,
+            None,
+        )),
+    );
     commands.insert_resource(image_layouts);
 }
 
