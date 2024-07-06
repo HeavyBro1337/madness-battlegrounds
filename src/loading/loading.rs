@@ -17,6 +17,11 @@ pub fn setup_loading(
     let mut image_layouts = ImageLayouts::default();
     loading_assets.0.push(
         asset_server
+            .load::<Scene>("maps/city_ace.glb#Scene0")
+            .untyped(),
+    );
+    loading_assets.0.push(
+        asset_server
             .load::<Image>("sprites/unit_idle.png")
             .untyped(),
     );
@@ -29,7 +34,7 @@ pub fn setup_loading(
     image_layouts.0.insert(
         "sprites/unit_idle.png".to_string(),
         atlases.add(TextureAtlasLayout::from_grid(
-            Vec2::ONE * 100.0,
+            UVec2::ONE * 100,
             6,
             1,
             None,

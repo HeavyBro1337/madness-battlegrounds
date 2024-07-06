@@ -7,13 +7,11 @@ use bevy::{
 };
 
 pub fn move_camera(
-    q_commander_transform: Query<&mut Transform, With<Camera>>,
+    mut q_commander_transform: Query<&mut Transform, With<Camera>>,
     keyboard: Res<ButtonInput<KeyCode>>,
     time: Res<Time>,
 ) {
-    return;
-
-    const SPEED: f32 = 300.0;
+    const SPEED: f32 = 10.0;
 
     let mut transform = q_commander_transform.single_mut();
 

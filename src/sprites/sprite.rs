@@ -37,8 +37,8 @@ pub fn spawn_units(
         .spawn(
             Sprite3d {
                 transform: Transform::from_translation(Vec3 {
-                    x: 0.0,
-                    y: -30.0,
+                    x: 5.0,
+                    y: -7.5,
                     z: 0.0,
                 }),
                 image: asset_server.load("sprites/unit_idle.png"),
@@ -54,20 +54,4 @@ pub fn spawn_units(
             AnimationTimer::new(Timer::from_seconds(0.1, TimerMode::Repeating)),
             CurrentAnimationFrameCount(6),
         ));
-}
-
-pub fn animate_sprite(
-    time: Res<Time>,
-    mut q_sprite: Query<(
-        &mut TextureAtlas,
-        &mut AnimationTimer,
-        &CurrentAnimationFrameCount,
-    )>,
-) {
-    for (mut atlas, mut timer, frame_count) in q_sprite.iter_mut() {
-        timer.0.tick(time.delta());
-        if timer.0.just_finished() {
-            atlas.index = (atlas.index + 1) % frame_count.0;
-        }
-    }
 }
