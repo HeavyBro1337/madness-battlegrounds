@@ -14,9 +14,7 @@ use loading::loading::{check_assets_ready, setup_loading};
 use sprites::animation::animate_sprite;
 use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
 use state::GameState;
-use world::{
-    world::{spawn_map, spawn_sun},
-};
+use world::world::{spawn_map, spawn_sun};
 
 mod ai;
 mod commander;

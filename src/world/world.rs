@@ -1,23 +1,17 @@
-use bevy::{gltf::GltfMesh, prelude::*};
-use bevy::gltf::{self, Gltf};
+use bevy::prelude::*;
 
-pub fn spawn_map(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
-) {
+pub fn spawn_map(mut commands: Commands, asset_server: Res<AssetServer>) {
     let scene_handle = asset_server.load("maps/city_ace.glb#Scene0");
 
-    commands.spawn(
-        SceneBundle {
-            scene: scene_handle,
-            transform: Transform::from_translation(Vec3 {
-                x: 0.0,
-                y: -9.0,
-                z: 0.0,
-            }),
-            ..default()
-        }
-    );
+    commands.spawn(SceneBundle {
+        scene: scene_handle,
+        transform: Transform::from_translation(Vec3 {
+            x: 0.0,
+            y: -9.0,
+            z: 0.0,
+        }),
+        ..default()
+    });
 }
 
 pub fn spawn_sun(mut commands: Commands) {
