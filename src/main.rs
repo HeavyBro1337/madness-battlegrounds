@@ -3,6 +3,7 @@ use bevy::{
     prelude::*,
     window::WindowResolution,
 };
+use bevy_inspector_egui::bevy_inspector;
 // use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
 use commander::{
@@ -43,7 +44,7 @@ fn main() {
         // .add_plugins(bevy_flycam::PlayerPlugin)
         .add_plugins(Sprite3dPlugin)
         .init_state::<GameState>()
-        // .add_plugins(WorldInspectorPlugin::new())
+        .add_plugins(bevy_inspector_egui::quick::WorldInspectorPlugin::new())
         .add_systems(Startup, (setup_commander_camera, init_selection))
         .add_systems(Update, rotate_sprites_to_camera)
         .add_systems(
