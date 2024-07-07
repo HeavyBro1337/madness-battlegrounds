@@ -15,7 +15,8 @@ use loading::loading::{check_assets_ready, setup_loading};
 use sprites::animation::animate_sprite;
 use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
 use state::GameState;
-use world::world::{spawn_map, spawn_sun};
+use vleue_navigator::VleueNavigatorPlugin;
+use world::{navmesh::{display_mesh, setup_navmesh}, world::{spawn_map, spawn_sun}};
 
 mod ai;
 mod commander;
@@ -44,6 +45,8 @@ fn main() {
         // .add_plugins(bevy_flycam::PlayerPlugin)
         .add_plugins(Sprite3dPlugin)
         .init_state::<GameState>()
+        .add_plugins(VleueNavigatorPlugin)
+
         .add_plugins(bevy_inspector_egui::quick::WorldInspectorPlugin::new())
         .add_systems(Startup, (setup_commander_camera, init_selection))
         .add_systems(Update, rotate_sprites_to_camera)
@@ -59,11 +62,12 @@ fn main() {
         .add_systems(PreStartup, setup_loading)
         .add_systems(
             OnEnter(GameState::Game),
-            (spawn_units, spawn_map, spawn_sun),
+            (spawn_units, spawn_map, spawn_sun, setup_navmesh),
         )
         .add_systems(
             Update,
             check_assets_ready.run_if(in_state(GameState::Loading)),
         )
+        .add_systems(Update, display_mesh.run_if(in_state(GameState::Game)))
         .run();
 }
