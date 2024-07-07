@@ -1,11 +1,6 @@
 use bevy::prelude::*;
 
-const SELECT_COLOR: Color = Color::LinearRgba(LinearRgba {
-    red: 0.0,
-    green: 1.0,
-    blue: 0.0,
-    alpha: 0.5,
-});
+const SELECT_COLOR: Color = Color::rgba(0.0, 1.0, 0.0, 0.25);
 
 #[derive(Resource, Default)]
 pub struct SelectionBox(Rect);

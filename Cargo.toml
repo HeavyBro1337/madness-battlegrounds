@@ -4,11 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bevy = "0.14.0"
+bevy = "0.13.0"
 # bevy_flycam = "0.13.0"
-bevy-inspector-egui = "0.25.0"
-bevy_sprite3d = "3.0.0"
+bevy-inspector-egui = "0.24.0"
+bevy_sprite3d = "2.8.0"
 pathfinding = "4.3.0"
 futures-lite = "*"
 num = "*"
-vleue_navigator = "0.8.0"
+oxidized_navigation = "0.10.0"
+bevy_rapier3d = "0.26.0"
+bevy_gltf_collider = { git = "https://github.com/Defernus/bevy_gltf_collider.git"}

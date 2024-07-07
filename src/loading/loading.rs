@@ -1,4 +1,4 @@
-use bevy::{prelude::*, utils::HashMap};
+use bevy::{gltf::Gltf, prelude::*, utils::HashMap};
 
 use crate::state::GameState;
 
@@ -39,7 +39,7 @@ pub fn setup_loading(
     image_layouts.0.insert(
         "sprites/unit_idle.png".to_string(),
         atlases.add(TextureAtlasLayout::from_grid(
-            UVec2 { x: 15, y: 19 },
+            Vec2::new(15.0, 19.0),
             6,
             1,
             None,
