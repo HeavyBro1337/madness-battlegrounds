@@ -3,7 +3,6 @@ use bevy::{
     prelude::*,
     window::WindowResolution,
 };
-use bevy_inspector_egui::bevy_inspector;
 // use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
 use commander::{

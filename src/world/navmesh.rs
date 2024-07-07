@@ -5,11 +5,10 @@ use bevy::{
     math::vec2,
     pbr::NotShadowCaster,
     prelude::*,
-    window::{PrimaryWindow, WindowResized},
 };
 use vleue_navigator::{
     prelude::{NavMeshBundle, NavMeshSettings, NavMeshStatus, NavMeshUpdateMode},
-    NavMesh, Path, Triangulation,
+    NavMesh, Triangulation,
 };
 
 const MESH_WIDTH: u32 = 150;

@@ -1,9 +1,8 @@
 use std::{
     marker::PhantomData,
-    ops::{Index, IndexMut},
 };
 
-use bevy::{ecs::query, prelude::*};
+use bevy::{prelude::*};
 
 use super::grid_loc::GridLocation;
 
@@ -35,9 +34,9 @@ impl<T> Grid<T> {
 pub struct DirtyGridEvent<T>(pub GridLocation, PhantomData<T>);
 
 pub fn remove_from_grid<T: Component>(
-    mut grid: ResMut<Grid<T>>,
+    grid: ResMut<Grid<T>>,
     mut q_rm_components: RemovedComponents<T>,
-    mut dirty: EventWriter<DirtyGridEvent<T>>,
+    dirty: EventWriter<DirtyGridEvent<T>>,
 ) {
     for removed_entity in q_rm_components.read() {}
 }

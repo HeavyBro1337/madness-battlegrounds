@@ -1,5 +1,5 @@
 use bevy::{color::palettes, gltf::GltfMesh, prelude::*};
-use vleue_navigator::{prelude::PrimitiveObstacle, NavMesh};
+use vleue_navigator::{NavMesh};
 
 pub fn spawn_map(
     mut commands: Commands,
