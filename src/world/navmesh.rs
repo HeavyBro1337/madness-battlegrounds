@@ -11,8 +11,8 @@ use vleue_navigator::{
     NavMesh, Triangulation,
 };
 
-const MESH_WIDTH: u32 = 150;
-const MESH_HEIGHT: u32 = 100;
+const MESH_WIDTH: u32 = 700;
+const MESH_HEIGHT: u32 = 700;
 
 pub fn setup_navmesh(mut commands: Commands) {
     commands.spawn(NavMeshBundle {
@@ -29,7 +29,6 @@ pub fn setup_navmesh(mut commands: Commands) {
 
             ..default()
         },
-        transform: Transform::from_rotation(Quat::from_rotation_x(-FRAC_PI_2)),
         // Mark it for update as soon as obstacles are changed.
         // Other modes can be debounced or manually triggered.
         update_mode: NavMeshUpdateMode::Direct,

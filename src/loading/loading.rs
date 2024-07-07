@@ -22,6 +22,11 @@ pub fn setup_loading(
     );
     loading_assets.0.push(
         asset_server
+            .load::<Gltf>("maps/city_ace.glb")
+            .untyped(),
+    );
+    loading_assets.0.push(
+        asset_server
             .load::<Image>("sprites/unit_idle.png")
             .untyped(),
     );
