@@ -1,7 +1,16 @@
 use std::f32::consts::FRAC_PI_2;
 
-use bevy::{color::palettes, math::vec2, pbr::NotShadowCaster, prelude::*, window::{PrimaryWindow, WindowResized}};
-use vleue_navigator::{prelude::{NavMeshBundle, NavMeshSettings, NavMeshStatus, NavMeshUpdateMode}, NavMesh, Path, Triangulation};
+use bevy::{
+    color::palettes,
+    math::vec2,
+    pbr::NotShadowCaster,
+    prelude::*,
+    window::{PrimaryWindow, WindowResized},
+};
+use vleue_navigator::{
+    prelude::{NavMeshBundle, NavMeshSettings, NavMeshStatus, NavMeshUpdateMode},
+    NavMesh, Path, Triangulation,
+};
 
 const MESH_WIDTH: u32 = 150;
 const MESH_HEIGHT: u32 = 100;

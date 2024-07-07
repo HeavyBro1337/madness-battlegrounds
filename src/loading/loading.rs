@@ -34,10 +34,7 @@ pub fn setup_loading(
     image_layouts.0.insert(
         "sprites/unit_idle.png".to_string(),
         atlases.add(TextureAtlasLayout::from_grid(
-            UVec2 {
-                x: 15,
-                y: 19
-            },
+            UVec2 { x: 15, y: 19 },
             6,
             1,
             None,

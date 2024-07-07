@@ -1,2 +1,2 @@
-pub mod world;
 pub mod navmesh;
+pub mod world;

@@ -16,7 +16,10 @@ use sprites::animation::animate_sprite;
 use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
 use state::GameState;
 use vleue_navigator::VleueNavigatorPlugin;
-use world::{navmesh::{display_mesh, setup_navmesh}, world::{spawn_map, spawn_sun}};
+use world::{
+    navmesh::{display_mesh, setup_navmesh},
+    world::{spawn_map, spawn_sun},
+};
 
 mod ai;
 mod commander;
@@ -46,7 +49,6 @@ fn main() {
         .add_plugins(Sprite3dPlugin)
         .init_state::<GameState>()
         .add_plugins(VleueNavigatorPlugin)
-
         .add_plugins(bevy_inspector_egui::quick::WorldInspectorPlugin::new())
         .add_systems(Startup, (setup_commander_camera, init_selection))
         .add_systems(Update, rotate_sprites_to_camera)
