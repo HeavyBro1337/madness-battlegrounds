@@ -1,20 +1,23 @@
+use ai::ai::{generate_path_to_cursor, poll_pathfinding_tasks_system};
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
     window::WindowResolution,
 };
 use bevy_rapier3d::{
-    plugin::{NoUserData, RapierPhysicsPlugin}, prelude::Collider, render::RapierDebugRenderPlugin
+    plugin::{NoUserData, RapierPhysicsPlugin},
+    prelude::Collider,
+    render::RapierDebugRenderPlugin,
 };
 // use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
 use commander::{
-    camera::setup_commander_camera,
-    control::move_camera,
-    selection::{init_selection, render_selection_box, update_selection},
+    camera::setup_commander_camera, control::move_camera, cursor::Cursor3dPlugin, selection::{init_selection, render_selection_box, update_selection}
 };
 use loading::loading::{check_assets_ready, setup_loading};
-use oxidized_navigation::{NavMesh, NavMeshSettings, OxidizedNavigationPlugin};
+use oxidized_navigation::{
+    debug_draw::OxidizedNavigationDebugDrawPlugin, NavMeshSettings, OxidizedNavigationPlugin,
+};
 use sprites::animation::animate_sprite;
 use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
 use state::GameState;
@@ -46,13 +49,15 @@ fn main() {
         )
         // .add_plugins(bevy_flycam::PlayerPlugin)
         .add_plugins(Sprite3dPlugin)
+        .add_plugins(Cursor3dPlugin)
         .init_state::<GameState>()
         .add_plugins((
             RapierPhysicsPlugin::<NoUserData>::default(),
-            RapierDebugRenderPlugin::default(),
+            // RapierDebugRenderPlugin::default(),
             OxidizedNavigationPlugin::<Collider>::new(NavMeshSettings::from_agent_and_bounds(
-                16.0, 32.0, 16.0, -10.0,
+                0.5, 1.9, 250.0, -1.0,
             )),
+            OxidizedNavigationDebugDrawPlugin,
         ))
         .add_plugins(bevy_inspector_egui::quick::WorldInspectorPlugin::new())
         .add_systems(Startup, (setup_commander_camera, init_selection))
@@ -64,6 +69,8 @@ fn main() {
                 animate_sprite,
                 update_selection,
                 render_selection_box,
+                poll_pathfinding_tasks_system,
+                generate_path_to_cursor
             ),
         )
         .add_systems(PreStartup, setup_loading)

@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 use bevy_gltf_collider::get_scene_colliders;
+use oxidized_navigation::NavMeshAffector;
 
 pub fn spawn_map(
     mut commands: Commands,
@@ -25,10 +26,12 @@ pub fn spawn_map(
         })
         .with_children(|parent| {
             for (collider, transform) in colliders.iter() {
-                parent.spawn((
-                    collider.clone(),
-                    TransformBundle::from_transform(*transform),
-                ));
+                parent
+                    .spawn((
+                        collider.clone(),
+                        TransformBundle::from_transform(*transform),
+                    ))
+                    .insert(NavMeshAffector);
             }
         });
 }
