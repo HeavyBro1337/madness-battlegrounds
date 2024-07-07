@@ -3,6 +3,9 @@ use bevy::{
     prelude::*,
     window::WindowResolution,
 };
+use bevy_rapier3d::{
+    plugin::{NoUserData, RapierPhysicsPlugin}, prelude::Collider, render::RapierDebugRenderPlugin
+};
 // use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
 use commander::{
@@ -11,6 +14,7 @@ use commander::{
     selection::{init_selection, render_selection_box, update_selection},
 };
 use loading::loading::{check_assets_ready, setup_loading};
+use oxidized_navigation::{NavMesh, NavMeshSettings, OxidizedNavigationPlugin};
 use sprites::animation::animate_sprite;
 use sprites::sprite::{rotate_sprites_to_camera, spawn_units};
 use state::GameState;
@@ -43,6 +47,13 @@ fn main() {
         // .add_plugins(bevy_flycam::PlayerPlugin)
         .add_plugins(Sprite3dPlugin)
         .init_state::<GameState>()
+        .add_plugins((
+            RapierPhysicsPlugin::<NoUserData>::default(),
+            RapierDebugRenderPlugin::default(),
+            OxidizedNavigationPlugin::<Collider>::new(NavMeshSettings::from_agent_and_bounds(
+                16.0, 32.0, 16.0, -10.0,
+            )),
+        ))
         .add_plugins(bevy_inspector_egui::quick::WorldInspectorPlugin::new())
         .add_systems(Startup, (setup_commander_camera, init_selection))
         .add_systems(Update, rotate_sprites_to_camera)

@@ -11,6 +11,6 @@ bevy_sprite3d = "2.8.0"
 pathfinding = "4.3.0"
 futures-lite = "*"
 num = "*"
-oxidized_navigation = "0.10.0"
-bevy_rapier3d = "0.26.0"
+oxidized_navigation = { git = "https://github.com/TheGrimsey/oxidized_navigation.git", features = ["rapier"] }
+bevy_rapier3d = "0.25.0"
 bevy_gltf_collider = { git = "https://github.com/Defernus/bevy_gltf_collider.git"}

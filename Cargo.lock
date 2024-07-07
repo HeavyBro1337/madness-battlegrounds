@@ -678,7 +678,7 @@ version = "0.1.0"
 source = "git+https://github.com/Defernus/bevy_gltf_collider.git#73ea52bf5bcf986aa493a608bec39eeeb5b1b396"
 dependencies = [
  "bevy",
- "bevy_rapier3d 0.25.0",
+ "bevy_rapier3d",
  "bincode",
  "serde",
  "serde_json",
@@ -842,21 +842,8 @@ dependencies = [
  "bitflags 2.6.0",
  "log",
  "nalgebra",
- "rapier3d 0.18.0",
+ "rapier3d",
  "serde",
-]
-
-[[package]]
-name = "bevy_rapier3d"
-version = "0.26.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "56691c8fbd7a8614368011bad8736789bb36176f49fc19fd6f3627322134659b"
-dependencies = [
- "bevy",
- "bitflags 2.6.0",
- "log",
- "nalgebra",
- "rapier3d 0.19.0",
 ]
 
 [[package]]
@@ -2625,7 +2612,7 @@ dependencies = [
  "bevy",
  "bevy-inspector-egui",
  "bevy_gltf_collider",
- "bevy_rapier3d 0.26.0",
+ "bevy_rapier3d",
  "bevy_sprite3d",
  "futures-lite",
  "num",
@@ -3175,15 +3162,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ordered-float"
-version = "4.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "19ff2cf528c6c03d9ed653d6c4ce1dc0582dc4af309790ad92f07c1cd551b0be"
-dependencies = [
- "num-traits",
-]
-
-[[package]]
 name = "overload"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3200,13 +3178,13 @@ dependencies = [
 
 [[package]]
 name = "oxidized_navigation"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fd569fb138ea821ad58311677ef27efcd9f10cb02bf46242111e912e20e2cddb"
+version = "0.11.0"
+source = "git+https://github.com/TheGrimsey/oxidized_navigation.git#29f0d110842de6c96f6ad9c6d744f06c51abf620"
 dependencies = [
  "bevy",
+ "bevy_rapier3d",
  "nalgebra",
- "parry3d 0.13.8",
+ "parry3d",
  "smallvec",
 ]
 
@@ -3255,28 +3233,6 @@ dependencies = [
  "num-traits",
  "rustc-hash 1.1.0",
  "serde",
- "simba",
- "slab",
- "smallvec",
- "spade",
-]
-
-[[package]]
-name = "parry3d"
-version = "0.15.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa342e0cdfc774fed0196714290ba2d85408b8ce9f295c40a0b1e05f3f8256ab"
-dependencies = [
- "approx",
- "arrayvec",
- "bitflags 1.3.2",
- "downcast-rs",
- "either",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "rustc-hash 1.1.0",
  "simba",
  "slab",
  "smallvec",
@@ -3460,31 +3416,9 @@ dependencies = [
  "nalgebra",
  "num-derive",
  "num-traits",
- "parry3d 0.13.8",
+ "parry3d",
  "rustc-hash 1.1.0",
  "serde",
- "simba",
-]
-
-[[package]]
-name = "rapier3d"
-version = "0.19.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93ce0398df94b282787ddd36a3a9c7e1ca19fa1e79722a2debc49c9f7c06e889"
-dependencies = [
- "approx",
- "arrayvec",
- "bit-vec",
- "bitflags 1.3.2",
- "crossbeam",
- "downcast-rs",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "parry3d 0.15.1",
- "rustc-hash 1.1.0",
  "simba",
 ]
 
