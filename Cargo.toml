@@ -10,6 +10,7 @@ bevy-inspector-egui = "0.24.0"
 bevy_sprite3d = "2.8.0"
 pathfinding = "4.3.0"
 futures-lite = "*"
+rand = "*"
 num = "*"
 oxidized_navigation = { git = "https://github.com/TheGrimsey/oxidized_navigation.git", features = ["rapier", "debug_draw"] }
 bevy_rapier3d = "0.25.0"

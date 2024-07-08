@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use bevy_gltf_collider::get_scene_colliders;
 use oxidized_navigation::NavMeshAffector;
+use rand::Rng;
 
 pub fn spawn_map(
     mut commands: Commands,
@@ -14,26 +15,20 @@ pub fn spawn_map(
         &mut scenes.get_mut(&scene_handle.clone()).unwrap().world,
     )
     .expect("mesh colliders: okay, clearly something is fucked.");
-    commands
-        .spawn(SceneBundle {
-            scene: scene_handle,
-            transform: Transform::from_translation(Vec3 {
-                x: 0.0,
-                y: -9.0,
-                z: 0.0,
-            }),
-            ..default()
-        })
-        .with_children(|parent| {
-            for (collider, transform) in colliders.iter() {
-                parent
-                    .spawn((
-                        collider.clone(),
-                        TransformBundle::from_transform(*transform),
-                    ))
-                    .insert(NavMeshAffector);
-            }
-        });
+    commands.spawn(SceneBundle {
+        scene: scene_handle,
+        transform: Transform::from_translation(Vec3 {
+            x: 0.0,
+            y: -9.0,
+            z: 0.0,
+        }),
+        ..default()
+    });
+    for (collider, transform) in colliders.iter() {
+        let mut transform_bundle = TransformBundle::from_transform(*transform);
+        transform_bundle.local.translation.y -= 9.0;
+        commands.spawn((collider.clone(), transform_bundle, NavMeshAffector));
+    }
 }
 
 pub fn spawn_sun(mut commands: Commands) {

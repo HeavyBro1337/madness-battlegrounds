@@ -1,6 +1,6 @@
+use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use bevy::{math::Vec3, prelude::Resource};
-use bevy::prelude::*;
 
 use super::camera::CommanderCamera;
 
@@ -30,6 +30,7 @@ fn cursor_to_ground_plane(
     };
 
     let global_cursor: Vec3 = ray.get_point(distance);
+
     mouse_coords.0 = global_cursor;
 }
 

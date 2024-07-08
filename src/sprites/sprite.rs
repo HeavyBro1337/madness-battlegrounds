@@ -1,7 +1,10 @@
 use bevy::prelude::*;
 use bevy_sprite3d::{Sprite3d, Sprite3dComponent, Sprite3dParams};
 
-use crate::loading::loading::ImageLayouts;
+use rand::thread_rng;
+use rand::Rng;
+
+use crate::{ai::ai::AiUnit, loading::loading::ImageLayouts};
 
 use super::animation::{AnimationTimer, CurrentAnimationFrameCount};
 
@@ -33,25 +36,28 @@ pub fn spawn_units(
         index: 1,
     };
 
-    commands
-        .spawn(
-            Sprite3d {
-                transform: Transform::from_translation(Vec3 {
-                    x: 5.0,
-                    y: -7.5,
-                    z: 0.0,
-                }),
-                image: asset_server.load("sprites/unit_idle.png"),
-                pixels_per_metre: 32.,
-                pivot: None,
-                alpha_mode: AlphaMode::Blend,
-                unlit: true,
-                ..default()
-            }
-            .bundle_with_atlas(&mut sprite_params, texture_atlas),
-        )
-        .insert((
-            AnimationTimer::new(Timer::from_seconds(0.1, TimerMode::Repeating)),
-            CurrentAnimationFrameCount(6),
-        ));
+    for _ in 0..500 {
+        commands
+            .spawn((
+                Sprite3d {
+                    transform: Transform::from_translation(Vec3 {
+                        x: rand::thread_rng().gen_range(-9..9) as f32,
+                        y: -7.5,
+                        z: rand::thread_rng().gen_range(-9..9) as f32,
+                    }),
+                    image: asset_server.load("sprites/unit_idle.png"),
+                    pixels_per_metre: 32.,
+                    pivot: Some(Vec2::new(0.5, 0.0)),
+                    alpha_mode: AlphaMode::Blend,
+                    unlit: true,
+                    ..default()
+                }
+                .bundle_with_atlas(&mut sprite_params, texture_atlas.clone()),
+                AiUnit::new(0.25, 5.0),
+            ))
+            .insert((
+                AnimationTimer::new(Timer::from_seconds(0.1, TimerMode::Repeating)),
+                CurrentAnimationFrameCount(6),
+            ));
+    }
 }

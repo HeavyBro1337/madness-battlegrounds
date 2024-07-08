@@ -1,4 +1,7 @@
-use ai::ai::{generate_path_to_cursor, poll_pathfinding_tasks_system};
+use ai::{
+    ai::{generate_path_to_cursor, poll_pathfinding_tasks_system, AsyncPathfindingTasks},
+    r#move::move_agents,
+};
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
@@ -12,7 +15,10 @@ use bevy_rapier3d::{
 // use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_sprite3d::Sprite3dPlugin;
 use commander::{
-    camera::setup_commander_camera, control::move_camera, cursor::Cursor3dPlugin, selection::{init_selection, render_selection_box, update_selection}
+    camera::setup_commander_camera,
+    control::move_camera,
+    cursor::Cursor3dPlugin,
+    selection::{init_selection, render_selection_box, update_selection},
 };
 use loading::loading::{check_assets_ready, setup_loading};
 use oxidized_navigation::{
@@ -53,12 +59,13 @@ fn main() {
         .init_state::<GameState>()
         .add_plugins((
             RapierPhysicsPlugin::<NoUserData>::default(),
-            // RapierDebugRenderPlugin::default(),
+            RapierDebugRenderPlugin::default(),
             OxidizedNavigationPlugin::<Collider>::new(NavMeshSettings::from_agent_and_bounds(
-                0.5, 1.9, 250.0, -1.0,
+                0.5, 1.9, 250.0, -10.0,
             )),
             OxidizedNavigationDebugDrawPlugin,
         ))
+        .insert_resource(AsyncPathfindingTasks::default())
         .add_plugins(bevy_inspector_egui::quick::WorldInspectorPlugin::new())
         .add_systems(Startup, (setup_commander_camera, init_selection))
         .add_systems(Update, rotate_sprites_to_camera)
@@ -70,7 +77,8 @@ fn main() {
                 update_selection,
                 render_selection_box,
                 poll_pathfinding_tasks_system,
-                generate_path_to_cursor
+                generate_path_to_cursor,
+                move_agents,
             ),
         )
         .add_systems(PreStartup, setup_loading)
