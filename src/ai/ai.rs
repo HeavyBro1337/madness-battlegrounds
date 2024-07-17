@@ -52,7 +52,7 @@ pub fn generate_path_to_cursor(
 
     let nav_mesh_lock = nav_mesh.get();
 
-    let mut end_pos = cursor.0;
+    let end_pos = cursor.0;
 
     dbg!(end_pos);
 
@@ -62,8 +62,6 @@ pub fn generate_path_to_cursor(
         let mut start_pos = transform.translation;
 
         start_pos.y = -9.0;
-
-        dbg!(start_pos);
 
         let task = thread_pool.spawn(async_path_find(
             nav_mesh_lock.clone(),
@@ -113,7 +111,7 @@ async fn async_path_find(
 pub fn poll_pathfinding_tasks_system(
     mut commands: Commands,
     mut pathfinding_task: ResMut<AsyncPathfindingTasks>,
-    mut q_units: Query<(&mut AiUnit)>,
+    mut q_units: Query<&mut AiUnit>,
 ) {
     // Go through and remove completed tasks.
     pathfinding_task.tasks.retain_mut(|task| {

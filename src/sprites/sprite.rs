@@ -1,4 +1,9 @@
+use core::hash;
+
 use bevy::prelude::*;
+use bevy::utils::hashbrown::HashSet;
+use bevy_rapier3d::dynamics::RigidBody;
+use bevy_rapier3d::prelude::*;
 use bevy_sprite3d::{Sprite3d, Sprite3dComponent, Sprite3dParams};
 
 use rand::thread_rng;
@@ -36,14 +41,22 @@ pub fn spawn_units(
         index: 1,
     };
 
-    for _ in 0..500 {
+    let mut hashset = HashSet::new();
+
+    for _ in 0..750 {
+        let point: IVec2 = IVec2::new(rand::thread_rng().gen_range(-9..9), rand::thread_rng().gen_range(-9..9));
+
+        if hashset.contains(&point) {
+            continue;
+        }
+        hashset.insert(point);
         commands
             .spawn((
                 Sprite3d {
                     transform: Transform::from_translation(Vec3 {
-                        x: rand::thread_rng().gen_range(-9..9) as f32,
+                        x: point.x as f32,
                         y: -7.5,
-                        z: rand::thread_rng().gen_range(-9..9) as f32,
+                        z: point.y as f32,
                     }),
                     image: asset_server.load("sprites/unit_idle.png"),
                     pixels_per_metre: 32.,
@@ -54,6 +67,9 @@ pub fn spawn_units(
                 }
                 .bundle_with_atlas(&mut sprite_params, texture_atlas.clone()),
                 AiUnit::new(0.25, 5.0),
+                KinematicCharacterController::default(),
+                RigidBody::KinematicPositionBased,
+                Collider::ball(0.25)
             ))
             .insert((
                 AnimationTimer::new(Timer::from_seconds(0.1, TimerMode::Repeating)),

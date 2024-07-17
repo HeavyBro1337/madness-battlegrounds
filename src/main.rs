@@ -1,6 +1,6 @@
 use ai::{
     ai::{generate_path_to_cursor, poll_pathfinding_tasks_system, AsyncPathfindingTasks},
-    r#move::move_agents,
+    r#move::move_agents, physics::read_cc_system,
 };
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
@@ -79,6 +79,7 @@ fn main() {
                 poll_pathfinding_tasks_system,
                 generate_path_to_cursor,
                 move_agents,
+                // read_cc_system
             ),
         )
         .add_systems(PreStartup, setup_loading)
